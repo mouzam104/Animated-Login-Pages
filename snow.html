@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page with Snowfall Effect</title>
+ <style>
+
+    /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Gradient Background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Snowfall Container */
+  #snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* Form Container */
+  .container {
+    position: relative;
+    width: 350px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  
+  .form-box form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-box {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-box input {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .input-box input:focus ~ label,
+  .input-box input:valid ~ label {
+    transform: translateY(-20px);
+    color: #fff;
+    font-size: 12px;
+  }
+  
+  .btn {
+    padding: 10px;
+    border: none;
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn:hover {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+  }
+  
+  .login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  .login-link a {
+    color: #6dd5ed;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+
+  /* Snowflakes styling */
+.snowflake {
+    position: absolute;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear;
+  }
+  
+  /* Snowfall animation */
+  @keyframes fall {
+    0% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+  .signup-form {
+    position: relative; /* Z-index ke liye required hai */
+    z-index: 20; /* Form snow ke upar rahega */
+    background: rgba(0, 0, 0, 0.7); /* Form transparent rahega, snow dikhai degi */
+  }
+  
+ </style>
+</head>
+<body>
+  <div id="snowfall"></div>
+
+  <div class="container">
+    <h2>Signup</h2>
+    <form>
+      <div class="input-box">
+        <input type="text" required>
+        <label>Username</label>
+      </div>
+      <div class="input-box">
+        <input type="email" required>
+        <label>Email</label>
+      </div>
+      <div class="input-box">
+        <input type="password" required>
+        <label>Password</label>
+      </div>
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="#">Login</a>
+    </div>
+  </div>
+
+  <script>
+    // Snowfall Effect
+const snowfallContainer = document.getElementById('snowfall');
+
+// Create Snowflakes
+function createSnowflakes() {
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+
+  // Random horizontal positions
+  snowflake.style.left = Math.random() * window.innerWidth + 'px';
+
+  // Random vertical positions for a full background effect
+  snowflake.style.top = Math.random() * window.innerHeight + 'px';
+
+  // Random speed, size, and opacity
+  snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Between 2-5 seconds
+  snowflake.style.opacity = Math.random();
+  snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Between 10px and 20px
+
+  snowflake.innerText = '❄'; // Snowflake symbol
+  snowfallContainer.appendChild(snowflake);
+
+  // Remove snowflake after animation
+  setTimeout(() => {
+    snowflake.remove();
+  }, 5000);
+}
+
+// Generate Snowflakes Continuously
+setInterval(createSnowflakes, 100);
+
+  </script>
+</body>
+</html>
